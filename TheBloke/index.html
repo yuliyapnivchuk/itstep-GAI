@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socks Shop</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 36px;
+      color: #333;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+
+    nav li {
+      margin: 0 16px;
+    }
+
+    .main-image {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+    }
+
+    .product-item {
+      background-color: #fff;
+      padding: 24px;
+      border-radius: 8px;
+    }
+
+    .product-image {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .product-info {
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    .product-name {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .product-price {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 40px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">Socks Shop</div>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+    <img src="https://placehold.co/400" alt="" class="main-image">
+  </div>
+  <div class="products">
+    <div class="product-item">
+      <img src="https://placehold.co/250x150" alt="" class="product-image">
+      <div class="product-info">
+        <h2 class="product-name">Product 1</h2>
+        <p class="product-price">$19.99</p>
+      </div>
+    </div>
+    <div class="product-item">
+      <img src="https://placehold.co/250x150" alt="" class="product-image">
+      <div class="product-info">
+        <h2 class="product-name">Product 2</h2>
+        <p class="product-price">$19.99</p>
+      </div>
+    </div>
+    <div class="product-item">
+      <img src="https://placehold.co/250x150" alt="" class="product-image">
+      <div class="product-info">
+        <h2 class="product-name">Product 3</h2>
+        <p class="product-price">$19.99</p>
+      </div>
+    </div>
+    <div class="product-item">
+      <img src="https://placehold.co/250x150" alt="" class="product-image">
+      <div class="product-info">
+        <h2 class="product-name">Product 4</h2>
+        <p class="product-price">$19.99</p>
+      </div>
+    </div>
+  </div>
+  <footer>
+    &copy; 2023 Socks Shop
+  </footer>
+</body>
+</html>

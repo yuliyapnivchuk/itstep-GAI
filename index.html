@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> socks Shop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: white;
+        }
+
+        .nav-button {
+            padding: 15px 30px;
+            text-decoration: none;
+            color: white;
+            border: none;
+            font-size: 1.2em;
+        }
+
+        .hero-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 800px;
+            background: linear-gradient(45deg, #606060, #707070);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-text h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtextline {
+            color: #707070;
+            font-size: 1.5em;
+            margin-top: 10px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, buy product);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-name {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            color: #707070;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .product-button {
+            background: #707070;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .product-button:hover {
+            background: #606060;
+            transform: scale(1.05);
+        }
+
+        .cart-button {
+            padding: 15px 30px;
+            background: #ff4444;
+            color: white;
+            border: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .cart-button:hover {
+            background: #ff6666;
+        }
+
+        . Footer {
+            background: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 1200px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://placehold.co/400">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Socks Shop</div>
+        <button class="nav-button" onclick="newProduct()">New Order</button>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-image">
+            <img src="https://placehold.co/800" alt="Socks" class="product-image">
+        </div>
+        <h1 class="hero-text">Find your perfect pair</h1>
+        <p class="hero-subtextline">Buy one, get one at 50% off</p>
+        <button class="product-button" onclick="newProduct()">Buy Now</button>
+    </section>
+
+    <main class="hero-section">
+        <div class="product-grid" id="productGrid"></div>
+    </main>
+
+    <footer>
+        <div class="Footer">
+            <p>Shop socks online now. We have everything you need.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleProductEffect() {
+            const productGrid = document.getElementById('productGrid');
+            const products = document.querySelectorAll('.product-item');
+
+            products.forEach(product => {
+                const isHover = product.classList.contains('hover');
+                product.classList.toggle('hover', isHover);
+                product.style.opacity = '0';
+                product.style.transform = 'translateY(' + (isHover ? 20 : -20) + 'px)';
+            });
+        }
+
+        function addProductToCart() {
+            const productGrid = document.getElementById('productGrid');
+            const product = document.querySelector('.product-item');
+
+            product.classList.add('cart');
+            product.classList.remove('product-button');
+            
+            const productImage = document.querySelector('.product-image');
+            const productName = document.querySelector('.product-name');
+            const productPrice = document.querySelector('.product-price');
+            const productButton = document.querySelector('.product-button');
+
+            productImage.classList.add('source');
+            productName.textContent = 'Cart added';
+            productPrice.textContent = 'Cart price';
+            productButton.textContent = 'Add to Cart';
+            
+            addProductToCartEvent();
+        }
+
+        function addProductToCartEvent() {
+            const product = document.querySelector('.product-item');
+            const productImage = document.querySelector('.product-image');
+            const productName = document.querySelector('.product-name');
+            const productPrice = document.querySelector('.product-price');
+            const productButton = document.querySelector('.product-button');
+
+            productImage.classList.add('source');
+            productName.textContent = 'Cart added';
+            productPrice.textContent = `Cart price: ${product.textContent}`;
+            productButton.textContent = 'Add to Cart';
+            
+            // Add product to cart
+            const cart = document.createElement('div');
+            const item = { name: product.textContent, price: productPrice.textContent, quantity: 1 };
+            const total = calculateTotal(item);
+            const items = ['Socks', 'Socks', 'Socks'];
+            
+            const order = {
+                total: total,
+                items,
+                item: item
+            };
+            fetch('/calculate-order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(order)
+            })
+            .then(response => response.json())
+            .then(data => {
+                productButton.textContent = 'Continue to Cart';
+                productName.textContent = 'Continue to Cart';
+                productPrice.textContent = `Continue to Cart: ${data.total}`;
+                productGrid.classList.add('cart-button');
+                
+                // Add to cart
+                addProductToCart();
+                showConfirmMessage();
+            })
+            .catch(error => {
+                console.error('Error calculating order:', error);
+                productButton.textContent = 'Continue to Cart';
+                productName.textContent = 'Continue to Cart';
+                productPrice.textContent = 'Continue to Cart: ${data.total

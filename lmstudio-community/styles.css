@@ -1,0 +1,7 @@
+/* Basic reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body, html { font-family: Arial, sans-serif; background-color: #f7f7f7; color: #333; text-align: center; }
+header h1 { font-size: 2rem; margin-bottom: .5rem; }
+footer { padding: 1rem; background-color: #eee; border-top: solid thin black; }
+.row::after { content: ""; clear: both; display: table; }
+.column img { max-width: 100%; height: auto; }
